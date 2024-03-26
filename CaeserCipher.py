@@ -44,5 +44,5 @@ def main() :
         elif selection == 'd' :
             print(decrypt(text, key)) 
     return
-
-main()   
+print('working')
+main()
