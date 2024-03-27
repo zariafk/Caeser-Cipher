@@ -1,24 +1,21 @@
 # CAESER CIPHER
 import tkinter as tk
 
-# Root/initial window creation + details
-window = tk.Tk()
-window.geometry ('600x500')
-window.title ('Caeser Cipher by Zaria')
-
+# Initial functions
 # To clear window 
 def clearWindow(window) :
     for widget in window.winfo_children() :
         widget.grid_forget()
 
-# Adding a label to root window
-label1 = tk.Label(window, text = 'Would you like to encrypt or decrypt text? ')
-label1.grid(column = 0, row = 0, padx = 5, pady = 5)
 
-# Functions for relevant buttons
-# Global alphabet variable for functions
-alphabet = 'abcdefghijklmnopqrstuvwxyz'
+# Home button to go to intila startup screen
+def homeButton() :
+    hButton = tk.Button(window, text = 'Home', bg = 'black', fg = 'white', command = lambda: startRender())
+    hButton.grid(column = 0, row = 0, padx = 20, pady = 5, sticky = 'e')
 
+
+
+                                                                    # ENCRYPT/DECRYPT FUNCTIONS
 # Function to encrypt plaintext
 def encrypt(plain) :
     key = 3 # typical caeser cipher key
@@ -34,6 +31,7 @@ def encrypt(plain) :
                 ci -= 26
             cipher += alphabet[ci]
     return cipher
+
 
 # Function to decrypt ciphertext
 def decrypt(cipher) :
@@ -51,11 +49,15 @@ def decrypt(cipher) :
             plain += alphabet[i]
     return plain
 
-# When encrypt button is pressed at encryption window
+
+
+                                                                        # BUTTON FUNCTIONS
+# When encrypt button is pressed at encryption window   
 def eExecClick(plain) :
     cipher = encrypt(plain)
     cipherLabel = tk.Label(window, text = cipher)
     cipherLabel.grid(column = 0, row = 4, pady = 30)
+
 
 # When decrypt button is pressed at decryption window
 def dExecClick(cipher) :
@@ -63,9 +65,12 @@ def dExecClick(cipher) :
     plainLabel = tk.Label(window, text = plain)
     plainLabel.grid(column = 0, row = 4, pady = 30)
 
+
 # When the encryption button is pressed from initial window
 def eClick() :
     clearWindow(window)
+    homeButton()
+
     eLabel = tk.Label(window, text = 'Encryption Mode')
     eLabel.grid(column = 0, row = 0, padx = 5, pady = 5, sticky = 'w')
     
@@ -78,9 +83,12 @@ def eClick() :
     eExec = tk.Button(window, text = 'Encrypt', fg = 'red', command = lambda: eExecClick(eInput.get()))
     eExec.grid(column = 0, row = 3, padx = 280, pady = 5, sticky = 'sw')
 
+
 # When decryption button is pressed from initial window
 def dClick() :
     clearWindow(window)
+    homeButton()
+
     dLabel = tk.Label(window, text = 'Decryption Mode')
     dLabel.grid(column = 0, row = 0, padx = 5, pady = 5, sticky = 'w')
 
@@ -93,11 +101,33 @@ def dClick() :
     dExec = tk.Button(window, text = 'Decrypt', fg = 'Green', command = lambda: dExecClick(dInput.get()))
     dExec.grid(column = 0, row = 3, padx = 280, pady = 5, sticky = 'sw')
 
-# Creating buttons for initial window
-eButton = tk.Button(window, text = 'Encrypt', bg = 'red', command = eClick)
-eButton.grid(column = 1, row = 1, padx = 10, pady = 50)
-dButton = tk.Button(window, text = 'Decrypt', bg = 'green', command = dClick)
-dButton.grid(column = 2, row = 1, padx = 10, pady = 50)
 
-# Execute tkinter
+
+                                                                                # START WINDOW
+# Initial window                                                   
+def startRender() :
+    # Global alphabet variable used in multiple functions
+    global alphabet
+    alphabet = 'abcdefghijklmnopqrstuvwxyz'
+
+    # Root/initial window creation + details
+    # Clear window
+    clearWindow(window)
+    
+    # Adding a label to root window
+    label1 = tk.Label(window, text = 'Would you like to encrypt or decrypt text? ')
+    label1.grid(column = 0, row = 0, padx = 5, pady = 5)
+
+    # Creating buttons for initial window
+    eButton = tk.Button(window, text = 'Encrypt', bg = 'red', command = eClick)
+    eButton.grid(column = 1, row = 1, padx = 10, pady = 50)
+    dButton = tk.Button(window, text = 'Decrypt', bg = 'green', command = dClick)
+    dButton.grid(column = 2, row = 1, padx = 10, pady = 50)
+
+# Execute
+window = tk.Tk()
+window.geometry ('600x500')
+window.title ('Caeser Cipher by Zaria')
+
+startRender()
 window.mainloop()
