@@ -15,53 +15,42 @@ def homeButton() :
 
 
 
-                                                                    # ENCRYPT/DECRYPT FUNCTIONS
-# Function to encrypt plaintext
-def encrypt(plain) :
-    key = 3 # typical caeser cipher key
-    cipher = ''
-    for letter in plain :
+                                                                    # ENCRYPT/DECRYPT FUNCTION
+# Encypting/Decrypting function
+def eOrD(text, ed) :
+    key = 3
+    result = ''
+    for letter in text :
         letter = letter.lower()
-        i = alphabet.find(letter)
-        if i == -1 :
-            cipher += letter
-        else : # accounts for x,y,z where there are <3 letters after them
-            ci = i+key
-            if ci > 25 :
-                ci -= 26
-            cipher += alphabet[ci]
-    return cipher
-
-
-# Function to decrypt ciphertext
-def decrypt(cipher) :
-    key = 3 # typical caeser cipher key
-    plain = ''
-    for letter in cipher :
-        letter = letter.lower()
-        ci = alphabet.find(letter)
-        if ci == -1 :
-            plain += letter
-        else : # accoutns for a,b,c where there are <3 letters before them
-            i = ci-key
-            if i < 0 :
-                i += 26
-            plain += alphabet[i]
-    return plain
+        original = alphabet.find(letter)
+        if original == -1 :
+            result += letter
+        else :
+            if ed == 'e' :
+                new = original + key
+                if new > 25 :
+                    new -= 26
+                result += alphabet[new]
+            elif ed == 'd' :
+                new = original - key
+                if new < 0 :
+                    new += 26
+                result += alphabet[new]
+    return result
 
 
 
                                                                         # BUTTON FUNCTIONS
 # When encrypt button is pressed at encryption window   
 def eExecClick(plain) :
-    cipher = encrypt(plain)
+    cipher = eOrD(plain, 'e')
     cipherLabel = tk.Label(window, text = cipher)
     cipherLabel.grid(column = 0, row = 4, pady = 30)
 
 
 # When decrypt button is pressed at decryption window
 def dExecClick(cipher) :
-    plain = decrypt(cipher)
+    plain = eOrD(cipher, 'd')
     plainLabel = tk.Label(window, text = plain)
     plainLabel.grid(column = 0, row = 4, pady = 30)
 
@@ -123,6 +112,8 @@ def startRender() :
     eButton.grid(column = 1, row = 1, padx = 10, pady = 50)
     dButton = tk.Button(window, text = 'Decrypt', bg = 'green', command = dClick)
     dButton.grid(column = 2, row = 1, padx = 10, pady = 50)
+
+
 
 # Execute
 window = tk.Tk()
