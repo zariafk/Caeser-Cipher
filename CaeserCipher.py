@@ -72,8 +72,11 @@ def modes(ed) :
     inp = tk.Entry(window, width = 75)
     inp.grid(column = 0, row = 2, padx = 70, pady = 20, sticky = 'sw')
 
+    # Perform encryption/decryption calculation
     calc = tk.Button(window, text = calcText, fg = colr, command = lambda: calcClick(inp.get(), ed))
     calc.grid(column = 0, row = 3, padx = 280, pady = 5, sticky = 'sw')
+    # Allows enter key to also execute encryption/decryption calculation
+    window.bind('<Return>', lambda event: calcClick(inp.get(), ed))
 
 
                                                                                 # START WINDOW
