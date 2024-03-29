@@ -63,7 +63,7 @@ def modes(ed) :
         calcText = 'Decrypt'
         colr = 'green'
 
-    label = tk.Label(window, text = labelText + 'Mode')
+    label = tk.Label(window, text = labelText + ' Mode')
     label.grid(column = 0, row = 0, padx = 5, pady = 5, sticky = 'w')
 
     inpLabel = tk.Label(window, text = 'Please enter the text you would like to ' + inpLabelText + ': ')
